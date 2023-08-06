@@ -1,6 +1,3 @@
-
-
-
 // Get references to the form elements
 const form = document.querySelector("form");
 const quantityDecreaseBtn = document.querySelector(".quantity-decrease");
@@ -35,7 +32,6 @@ form.addEventListener("submit", async (event) => {
   const province = document.getElementById("countries").value;
   const product = document.getElementById("products").value;
 
-  // You can add more validation here if needed
   if (
     firstName &&
     phoneNumber &&
@@ -61,12 +57,12 @@ form.addEventListener("submit", async (event) => {
       );
 
       if (response.status === 200) {
-        console.log("Email sent successfully!");
+        alert("Your order has been placed successfully!");
       } else {
         console.error("Error sending email:", response.text);
       }
     } catch (error) {
-      console.error("Error sending email:", error);
+      alert("There was an error sending your order. Please try again.");
     }
   } else {
     alert("Please fill out all the required fields.");
