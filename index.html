@@ -46,7 +46,7 @@
                 type="tel"
                 id="phone_number"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="John"
+                placeholder="0770-------"
                 required
               />
             </div>
@@ -55,7 +55,7 @@
             <label
               for="countries"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >Select an option</label
+              >Select Province</label
             >
             <select
               id="countries"
@@ -81,6 +81,18 @@
               <option>Kirkuk (كركوك)</option>
               <option>As-Sulaymāniyyah (السليمانية)</option>
             </select>
+            <label
+              for="countries"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white my-4"
+              >Input the address</label
+            >
+            <input
+              type="text"
+              id="address"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Address"
+              required
+            />
           </div>
           <div class="my-5">
             <label class="block text-sm font-medium text-gray-700"
@@ -94,9 +106,35 @@
               <option>Multi Surface Disinfectant</option>
               <option>Multi Surface Disinfectant Hospital</option>
               <option>Air Disinfectant</option>
-              <option>PetDis</option>
-              <option>Fruits & Vegetable 06</option>
+              <option>Pet Disinfectant</option>
+              <option>Fruits & Vegetable Disinfectant</option>
             </select>
+            <label
+              for="product_types"
+              class="my-4 block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Select Product Type</label
+            >
+            <select
+              id="product_types"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option value="">Select Product Type</option>
+            </select>
+            <!-- show the price  -->
+            <div class="my-5">
+              <label
+                for="price"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >Price</label
+              >
+              <!-- showcase the price with a div in the middle -->
+              <div
+                class="flex items-center bg-gray-100 dark:bg-gray-700 p-2 rounded-lg"
+              >
+                <span class="text-lg text-gray-800 dark:text-white">$100</span>
+                <!-- You can replace "$100" with your actual price value -->
+              </div>  
+            </div>
           </div>
           <div class="flex items-center justify-between my-5">
             <svg
