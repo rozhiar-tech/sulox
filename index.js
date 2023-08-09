@@ -4,6 +4,7 @@ const quantityIncreaseBtn = document.querySelector(".quantity-increase");
 const quantityDisplay = document.querySelector(".quantity-display");
 const priceDisplay = document.getElementById("price");
 const productGrid = document.getElementById("productGrid");
+const languageButton = document.getElementById("languageButton");
 
 let quantity = 1;
 
@@ -27,6 +28,7 @@ const translations = {
     price: "Price",
     selectedProduct: "Selected Product",
     quantity: "Quantity",
+    changeLanguage: "Change Language",
     // Add more translations as needed
   },
   ar: {
@@ -40,15 +42,16 @@ const translations = {
     quantity: "كمية",
     submit: "تقديم الطلب",
     changeLanguage: "تغيير اللغة",
+
     // Add translated product names
-    "Fruits & Vegetable Disinfectant 1 L": "مطهر الخضار والفواكه 1L",
-    "Fruits & Vegetable Disinfectant 5 L": "مطهر الخضار والفواكه 5L",
+    "Fruits & Vegetable Disinfectant 1 L": "مطهر الخضار والفواكه 1ل",
+    "Fruits & Vegetable Disinfectant 5 L": "مطهر الخضار والفواكه 5ل",
     "Hand & Skin Disinfectant 125ml": "مطهر اليدين والجلد 125مل",
     "Hand & Skin Disinfectant 750ml": "مطهر اليدين والجلد 750مل",
-    "Multi surface Dis 1 L": "مطهر الأسطح 1L",
-    "Multi surface Dis 10 L": "مطهر الأسطح 10L",
-    "Multi surface Dis 5 L": "مطهر الأسطح 5L",
-    "Pet Disinfectant 1 L": "مطهر الحيوانات الأليفة 1L",
+    "Multi surface Dis 1 L": "مطهر الأسطح 1ل",
+    "Multi surface Dis 10 L": "مطهر الأسطح 10ل",
+    "Multi surface Dis 5 L": "مطهر الأسطح 5ل",
+    "Pet Disinfectant 1 L": "مطهر الحيوانات الأليفة 1ل",
     // Add more translations as needed
   },
 };
@@ -70,7 +73,10 @@ function updateLanguage(language) {
 
 // Handle language button click
 document.getElementById("languageButton").addEventListener("click", () => {
+  console.log(translations[currentLanguage].changeLanguage);
   currentLanguage = currentLanguage === "en" ? "ar" : "en";
+  languageButton.textContent = translations[currentLanguage].changeLanguage;
+
   updateLanguage(currentLanguage);
 });
 
@@ -80,14 +86,16 @@ updateLanguage(currentLanguage);
 quantityDecreaseBtn.addEventListener("click", () => {
   if (quantity > 1) {
     quantity--;
-    quantityDisplay.textContent = `Quantity: ${quantity}`;
+    quantityDisplay.textContent = `${translations[currentLanguage].quantity}: ${quantity}`;
+
     updatePrice();
   }
 });
 
 quantityIncreaseBtn.addEventListener("click", () => {
   quantity++;
-  quantityDisplay.textContent = `Quantity: ${quantity}`;
+  quantityDisplay.textContent = `${translations[currentLanguage].quantity}: ${quantity}`;
+
   updatePrice();
 });
 
@@ -96,19 +104,23 @@ function generateProductGrid() {
 
   products.forEach((productName) => {
     const productDiv = document.createElement("div");
-    productDiv.className = "flex items-center cursor-pointer product-item"; // Add 'product-item' class
+    productDiv.className = "flex items-center cursor-pointer product-item";
     productDiv.addEventListener("click", () => updateProduct(productName));
 
     const productImage = new Image();
-    // Adjust image name
     productImage.src = `./assets/items/${productName}.svg`;
     productImage.alt = productName;
     productImage.className = "w-12 h-12 mr-2";
 
     const productNameElement = document.createElement("span");
-    productNameElement.textContent = productName;
-    productNameElement.setAttribute("data-translate", productName); // Add this line
+    productNameElement.className = "text-sm font-semibold";
 
+    // Get translated product name or use the default name if not available
+    const translatedName =
+      translations[currentLanguage][productName] || productName;
+    productNameElement.textContent = translatedName;
+
+    productNameElement.setAttribute("data-translate", productName);
     productDiv.appendChild(productImage);
     productDiv.appendChild(productNameElement);
     productGrid.appendChild(productDiv);
