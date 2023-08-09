@@ -28,7 +28,7 @@ const translations = {
     price: "Price",
     selectedProduct: "Selected Product",
     quantity: "Quantity",
-    changeLanguage: "Change Language",
+    changeLanguage: "العربية",
     // Add more translations as needed
   },
   ar: {
@@ -41,7 +41,7 @@ const translations = {
     selectedProduct: "المنتج المحدد",
     quantity: "كمية",
     submit: "تقديم الطلب",
-    changeLanguage: "تغيير اللغة",
+    changeLanguage: "English",
 
     // Add translated product names
     "Fruits & Vegetable Disinfectant 1 L": "مطهر الخضار والفواكه 1ل",
