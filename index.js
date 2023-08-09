@@ -29,6 +29,28 @@ const translations = {
     selectedProduct: "Selected Product",
     quantity: "Quantity",
     changeLanguage: "العربية",
+    submit: "Submit Order",
+    provinceOptions: [
+      "Select Province",
+      "Baghdād (بغداد)",
+      "Salāh ad-Dīn (صلاح الدين)",
+      "Diyālā (ديالى)",
+      "Wāsit (واسط)",
+      "Maysān (ميسان)",
+      "Al-Basrah (البصرة)",
+      "Dhī Qār (ذي قار",
+      "Al-Muthannā (المثنى)",
+      "Al-Qādisiyyah (القادسية)",
+      "Bābil (بابل)",
+      "Al-Karbalā' (بلاء)",
+      "An-Najaf (النجف)",
+      "Al-Anbar (الأنبار",
+      "Nīnawā (نينوى)",
+      "Dahūk (دهوك)",
+      "Arbīl (أربيل)",
+      "Kirkuk (كركوك)",
+      "As-Sulaymāniyyah (السليمانية)",
+    ],
     // Add more translations as needed
   },
   ar: {
@@ -42,6 +64,27 @@ const translations = {
     quantity: "كمية",
     submit: "تقديم الطلب",
     changeLanguage: "English",
+    provinceOptions: [
+      "حدد مقاطعة",
+      "بغداد",
+      "صلاح الدين",
+      "ديالى",
+      "واسط",
+      "ميسان",
+      "البصرة",
+      "ذي قار",
+      "المثنى",
+      "القادسية",
+      "بابل",
+      "كربلاء",
+      "النجف",
+      "الأنبار",
+      "نينوى",
+      "دهوك",
+      "أربيل",
+      "كركوك",
+      "السليمانية",
+    ],
 
     // Add translated product names
     "Fruits & Vegetable Disinfectant 1 L": "مطهر الخضار والفواكه 1ل",
@@ -49,10 +92,9 @@ const translations = {
     "Hand & Skin Disinfectant 125ml": "مطهر اليدين والجلد 125مل",
     "Hand & Skin Disinfectant 750ml": "مطهر اليدين والجلد 750مل",
     "Multi surface Dis 1 L": "مطهر الأسطح 1ل",
-    "Multi surface Dis 10 L": "مطهر الأسطح 10ل",
     "Multi surface Dis 5 L": "مطهر الأسطح 5ل",
+    "Multi surface Dis 10 L": "مطهر الأسطح 10ل",
     "Pet Disinfectant 1 L": "مطهر الحيوانات الأليفة 1ل",
-    // Add more translations as needed
   },
 };
 
@@ -61,14 +103,16 @@ let currentLanguage = "en";
 
 // Function to update text content based on the selected language
 function updateLanguage(language) {
-  // console.log("Updating language to", language);
   const translatedText = translations[language];
   Object.keys(translatedText).forEach((key) => {
     const element = document.querySelector(`[data-translate="${key}"]`);
     if (element) {
       element.textContent = translatedText[key];
     }
+    generateProductGrid();
   });
+
+  generateProvinceOptions(); // Update province options based on language
 }
 
 // Handle language button click
@@ -117,13 +161,31 @@ function generateProductGrid() {
 
     // Get translated product name or use the default name if not available
     const translatedName =
-      translations[currentLanguage][productName] || productName;
+      translations[currentLanguage][productName] !== undefined
+        ? translations[currentLanguage][productName]
+        : productName;
+    console.log(translatedName);
     productNameElement.textContent = translatedName;
 
     productNameElement.setAttribute("data-translate", productName);
     productDiv.appendChild(productImage);
     productDiv.appendChild(productNameElement);
     productGrid.appendChild(productDiv);
+  });
+}
+function generateProvinceOptions() {
+  const provinceSelect = document.getElementById("countries");
+  provinceSelect.innerHTML = "";
+
+  const language = currentLanguage; // Get the current language
+
+  const translatedOptions = translations[language].provinceOptions;
+
+  translatedOptions.forEach((optionText, index) => {
+    const option = document.createElement("option");
+    option.value = optionText;
+    option.textContent = optionText;
+    provinceSelect.appendChild(option);
   });
 }
 
