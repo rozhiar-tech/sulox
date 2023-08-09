@@ -94,32 +94,21 @@
               required
             />
           </div>
+          <div id="productGrid" class="grid grid-cols-2 gap-4"></div>
           <div class="my-5">
-            <label class="block text-sm font-medium text-gray-700"
-              >Select Product</label
-            >
-            <select
-              id="products"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-              <option>Hand & Skin Disinfectant</option>
-              <option>Multi Surface Disinfectant</option>
-              <option>Multi Surface Disinfectant Hospital</option>
-              <option>Air Disinfectant</option>
-              <option>Pet Disinfectant</option>
-              <option>Fruits & Vegetable Disinfectant</option>
-            </select>
             <label
-              for="product_types"
-              class="my-4 block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >Select Product Type</label
+              for="selected_product"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-            <select
-              id="product_types"
+              Selected Product
+            </label>
+            <input
+              type="text"
+              id="selected_product"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-              <option value="">Select Product Type</option>
-            </select>
+              readonly
+            />
+
             <!-- show the price  -->
             <div class="my-5">
               <label
