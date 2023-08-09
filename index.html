@@ -12,6 +12,7 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="./style.css" />
     <title>Sulox</title>
   </head>
   <body class="bg-gray-100">
@@ -20,13 +21,21 @@
         class="bg-white shadow-lg rounded-lg p-8 space-y-4 max-w-md w-full flex flex-col items-center m-2 sm:w-96"
       >
         <img src="./assets/logo.jpg" alt="logo" class="w-32" />
+        <button
+          id="languageButton"
+          class="px-4 py-2 bg-indigo-500 text-white rounded-lg"
+        >
+          Change Language
+        </button>
+
         <form>
           <div class="grid grid-cols-2 gap-4">
             <div class="my-5">
               <label
+                data-translate="firstName"
                 for="first_name"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >First name</label
+                >Name</label
               >
               <input
                 type="text"
@@ -38,6 +47,7 @@
             </div>
             <div class="my-5">
               <label
+                data-translate="phoneNumber"
                 for="Phone_Number"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >Phone Number</label
@@ -53,6 +63,7 @@
           </div>
           <div class="my-5">
             <label
+              data-translate="selectProvince"
               for="countries"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >Select Province</label
@@ -82,6 +93,7 @@
               <option>As-Sulaymāniyyah (السليمانية)</option>
             </select>
             <label
+              data-translate="inputAddress"
               for="countries"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white my-4"
               >Input the address</label
@@ -91,12 +103,14 @@
               id="address"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Address"
+              data-translate="address"
               required
             />
           </div>
           <div id="productGrid" class="grid grid-cols-2 gap-4"></div>
           <div class="my-5">
             <label
+              data-translate="selectedProduct"
               for="selected_product"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
@@ -112,6 +126,7 @@
             <!-- show the price  -->
             <div class="my-5">
               <label
+                data-translate="price"
                 for="price"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >Price</label
@@ -134,7 +149,11 @@
                 d="M8.766.566A2 2 0 0 0 6.586 1L1 6.586a2 2 0 0 0 0 2.828L6.586 15A2 2 0 0 0 10 13.586V2.414A2 2 0 0 0 8.766.566Z"
               />
             </svg>
-            <span class="text-gray-600 quantity-display">Quantity: 1</span>
+            <span
+              data-translate="quantity"
+              class="text-gray-600 quantity-display"
+              >Quantity: 1</span
+            >
             <svg
               class="w-6 h-6 text-gray-800 dark:text-white quantity-increase"
               aria-hidden="true"
@@ -149,6 +168,7 @@
           </div>
           <div class="my-5">
             <button
+              data-translate="submit"
               type="submit"
               class="bg-indigo-500 text-white px-4 py-2 rounded-lg w-full mt-4 focus:outline-none focus:ring-2 focus:ring-indigo-200"
             >

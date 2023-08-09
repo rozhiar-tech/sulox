@@ -17,6 +17,65 @@ const products = [
   "Multi surface Dis 10 L",
   "Pet Disinfectant 1 L",
 ];
+const translations = {
+  en: {
+    firstName: "First name",
+    phoneNumber: "Phone Number",
+    selectProvince: "Select Province",
+    address: "Address",
+    inputAddress: "Input the address",
+    price: "Price",
+    selectedProduct: "Selected Product",
+    quantity: "Quantity",
+    // Add more translations as needed
+  },
+  ar: {
+    firstName: "اسم",
+    phoneNumber: "رقم التليفون",
+    selectProvince: "حدد مقاطعة",
+    address: "عنوان",
+    inputAddress: "أدخل العنوان",
+    price: "سعر",
+    selectedProduct: "المنتج المحدد",
+    quantity: "كمية",
+    submit: "تقديم الطلب",
+    changeLanguage: "تغيير اللغة",
+    // Add translated product names
+    "Fruits & Vegetable Disinfectant 1 L": "مطهر الخضار والفواكه 1L",
+    "Fruits & Vegetable Disinfectant 5 L": "مطهر الخضار والفواكه 5L",
+    "Hand & Skin Disinfectant 125ml": "مطهر اليدين والجلد 125مل",
+    "Hand & Skin Disinfectant 750ml": "مطهر اليدين والجلد 750مل",
+    "Multi surface Dis 1 L": "مطهر الأسطح 1L",
+    "Multi surface Dis 10 L": "مطهر الأسطح 10L",
+    "Multi surface Dis 5 L": "مطهر الأسطح 5L",
+    "Pet Disinfectant 1 L": "مطهر الحيوانات الأليفة 1L",
+    // Add more translations as needed
+  },
+};
+
+// Default language
+let currentLanguage = "en";
+
+// Function to update text content based on the selected language
+function updateLanguage(language) {
+  // console.log("Updating language to", language);
+  const translatedText = translations[language];
+  Object.keys(translatedText).forEach((key) => {
+    const element = document.querySelector(`[data-translate="${key}"]`);
+    if (element) {
+      element.textContent = translatedText[key];
+    }
+  });
+}
+
+// Handle language button click
+document.getElementById("languageButton").addEventListener("click", () => {
+  currentLanguage = currentLanguage === "en" ? "ar" : "en";
+  updateLanguage(currentLanguage);
+});
+
+// Initialize text content based on the default language
+updateLanguage(currentLanguage);
 
 quantityDecreaseBtn.addEventListener("click", () => {
   if (quantity > 1) {
@@ -35,21 +94,23 @@ quantityIncreaseBtn.addEventListener("click", () => {
 function generateProductGrid() {
   productGrid.innerHTML = "";
 
-  products.forEach((product) => {
+  products.forEach((productName) => {
     const productDiv = document.createElement("div");
-    productDiv.className = "flex items-center cursor-pointer";
-    productDiv.addEventListener("click", () => updateProduct(product));
+    productDiv.className = "flex items-center cursor-pointer product-item"; // Add 'product-item' class
+    productDiv.addEventListener("click", () => updateProduct(productName));
 
-    const productImage = document.createElement("img");
-    productImage.src = `${window.location.origin}/assets/items/${product}.svg`;
-    productImage.alt = product;
+    const productImage = new Image();
+    // Adjust image name
+    productImage.src = `./assets/items/${productName}.svg`;
+    productImage.alt = productName;
     productImage.className = "w-12 h-12 mr-2";
 
-    const productName = document.createElement("span");
-    productName.textContent = product;
+    const productNameElement = document.createElement("span");
+    productNameElement.textContent = productName;
+    productNameElement.setAttribute("data-translate", productName); // Add this line
 
     productDiv.appendChild(productImage);
-    productDiv.appendChild(productName);
+    productDiv.appendChild(productNameElement);
     productGrid.appendChild(productDiv);
   });
 }
@@ -102,15 +163,37 @@ form.addEventListener("submit", async (event) => {
 
 // Update the product and price display
 function updateProduct(product) {
-  document.getElementById("selected_product").value = product;
+  document.querySelectorAll(".product-item").forEach((item) => {
+    item.classList.remove("selected");
+  });
+
+  const selectedProductDiv = event.currentTarget;
+  selectedProductDiv.classList.add("selected");
+
+  const selectedProductElement = document.getElementById("selected_product");
+  selectedProductElement.value = product; // Update selected product value
+
+  // Translate and update selected product name
+  const translatedProductName = translations[currentLanguage][product];
+  selectedProductElement.setAttribute("data-translate", product);
+  selectedProductElement.value = translatedProductName || product; // Use original product name if translation is not available
+
   updatePrice();
 }
-
 // Update the price display based on the selected product and quantity
 function updatePrice() {
   const selectedProduct = document.getElementById("selected_product").value;
-  const totalPrice = getPrice(selectedProduct) * quantity;
-  priceDisplay.textContent = `Price: IQD ${totalPrice}`;
+  const englishProductName = document
+    .getElementById("selected_product")
+    .getAttribute("data-translate");
+  const translatedProductName =
+    translations[currentLanguage][englishProductName];
+
+  const price = getPrice(englishProductName) * quantity;
+
+  priceDisplay.textContent = `Price: ${
+    currentLanguage === "ar" ? price + " IQD" : "IQD " + price
+  }`;
 }
 
 // Get the price of a product

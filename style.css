@@ -1,0 +1,5 @@
+/* Example CSS for the selected effect */
+.product-item.selected {
+  background-color: #f0f0f0; /* Change to your desired color */
+  border: 0.5px solid #007bff; /* Change to your desired color */
+}
